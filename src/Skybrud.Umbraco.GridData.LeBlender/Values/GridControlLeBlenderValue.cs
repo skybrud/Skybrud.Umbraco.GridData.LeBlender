@@ -7,6 +7,9 @@ using Skybrud.Umbraco.GridData.Interfaces;
 
 namespace Skybrud.Umbraco.GridData.LeBlender.Values {
 
+    /// <summary>
+    /// Class representing the value of a LeBlender control.
+    /// </summary>
     public class GridControlLeBlenderValue : IGridControlValue {
 
         #region Properties
@@ -50,6 +53,10 @@ namespace Skybrud.Umbraco.GridData.LeBlender.Values {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="control"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         protected GridControlLeBlenderValue(GridControl control) {
             Control = control;
             LeBlender = control.JObject.ToObject<LeBlenderModel>();
@@ -59,6 +66,10 @@ namespace Skybrud.Umbraco.GridData.LeBlender.Values {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public string GetSearchableText() {
             if (!IsValid) return "";
             StringBuilder sb = new StringBuilder();

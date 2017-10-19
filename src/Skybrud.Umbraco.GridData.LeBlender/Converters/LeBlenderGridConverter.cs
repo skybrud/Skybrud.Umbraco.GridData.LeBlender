@@ -7,6 +7,9 @@ using Skybrud.Umbraco.GridData.Rendering;
 
 namespace Skybrud.Umbraco.GridData.LeBlender.Converters {
 
+    /// <summary>
+    /// Converter for handling the LeBlender editors.
+    /// </summary>
     public class LeBlenderGridConverter : IGridConverter {
 
         /// <summary>

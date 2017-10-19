@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Config;
 
@@ -11,17 +12,40 @@ namespace Skybrud.Umbraco.GridData.LeBlender.Config {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the minimum amount of allowed items.
+        /// </summary>
+        public int Min { get; private set; }
+
+        /// <summary>
+        /// Gets the maximium amount of allowed items.
+        /// </summary>
         public int Max { get; private set; }
 
+        /// <summary>
+        /// Gets whether the control should be rendred in the grid.
+        /// </summary>
         public bool RenderInGrid { get; private set; }
+
+        /// <summary>
+        /// Gets the cache period of the control. If this property equals <see cref="TimeSpan.Zero"/>, caching is disabled.
+        /// </summary>
+        public TimeSpan CachePeriod { get; private set; }
+
+        /// <summary>
+        /// Gets whether caching has been enabled for controls of this type.
+        /// </summary>
+        public bool HasCachePeriod => CachePeriod != TimeSpan.Zero;
 
         #endregion
 
         #region Constructors
 
         private GridEditorLeBlenderConfig(GridEditor editor, JObject obj) : base(editor, obj) {
+            Min = obj.GetInt32("min");
             Max = obj.GetInt32("max");
             RenderInGrid = obj.GetBoolean("renderInGrid");
+            CachePeriod = obj.GetDouble("expiration", TimeSpan.FromSeconds);
         }
 
         #endregion
